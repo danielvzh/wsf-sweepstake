@@ -1,0 +1,10 @@
+<h1>Info</h1>
+<p>Name: <%= @member.name %></p>
+<p>Points: <%= @member.points %></p>
+
+<%= link_to 'Back to all members', members_path %>
+
+<%= link_to 'Delete',
+  member_path(@member),
+  data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}
+%>
