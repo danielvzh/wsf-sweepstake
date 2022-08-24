@@ -1,1 +1,22 @@
 <h1>Home</h1>
+
+<p>Find user:</p>
+<form action="/" method="get">
+  <label for="member">Username: </label>
+  <input id="member"
+  name="member"
+  type="text"
+  velue=" <%= params[:member] %> "
+  placeholder="John">
+
+  <input type="submit">
+</form>
+
+
+<ol>
+<% @members.each do |member| %>
+  <li>member: <%= member %></li>
+<% end %>
+</ol>
+
+<%= link_to "About", about_path %>
