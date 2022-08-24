@@ -1,9 +1,9 @@
 class PagesController < ApplicationController
   def home
-    @members = %W(x y z a)
+    @members = Member.all
 
     if params[:member]
-      @members = @members.select { |member| member.start_with? params[:member].downcase }
+      @members = @members.select { |member| member.name.downcase.start_with? params[:member].downcase }
     end
   end
 
