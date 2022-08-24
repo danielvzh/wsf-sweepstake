@@ -31,6 +31,10 @@ class MembersController < ApplicationController
     redirect_to members_path, status: :see_other
   end
 
+  def top
+    @members = Member.where(points: Member.maximum(:points))
+  end
+
   private
 
   def member_params

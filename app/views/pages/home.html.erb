@@ -1,6 +1,11 @@
 <h1>Home</h1>
 
-<p>Find user:</p>
+<h2>Top members</h2>
+  <% @top_members.each do |member| %>
+    <p><%= member.name %></p>
+  <% end %>
+
+<h2>Find user:</h2>
 <form action="/" method="get">
   <label for="member">Username: </label>
   <input id="member"

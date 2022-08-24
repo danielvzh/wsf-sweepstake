@@ -20,7 +20,12 @@ Rails.application.routes.draw do
   # delete 'members/:id', to: 'members#destroy'
 
   # generate 7 routes above with just one line
-  resources :members
+  resources :members do
+    collection do
+      # get 'top', to: 'members#top', as: :top_members
+      get :top
+    end
+  end
 
   # GET url/about
   get 'about', to: 'pages#about'
