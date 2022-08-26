@@ -78,3 +78,5 @@ gem "faker"
 gem "autoprefixer-rails"
 
 gem "font-awesome-sass", "~> 6.1"
+
+gem "hotwire-rails"

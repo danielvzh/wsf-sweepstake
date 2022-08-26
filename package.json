@@ -1,0 +1,8 @@
+{
+  "name": "wsf-sweepstake",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:danielvzh/wsf-sweepstake.git",
+  "author": "Daniel Zhukovsky <daniel.zhukovsky@gmail.com>",
+  "license": "MIT"
+}
