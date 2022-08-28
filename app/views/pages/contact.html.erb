@@ -1,3 +1,9 @@
 <h1>Contact Us</h1>
 
 <p>Contact details..</p>
+
+<ol>
+<% @members.each do |member| %>
+  <li><%= member.name %></li>
+<% end %>
+</ol>

@@ -32,4 +32,6 @@ Rails.application.routes.draw do
   get 'about', to: 'pages#about'
   # GET url/contact
   get 'contact', to: 'pages#contact'
+  # GET url/wheel
+  get 'wheel', to: 'pages#wheel'
 end

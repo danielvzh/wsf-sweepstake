@@ -14,4 +14,8 @@ class PagesController < ApplicationController
 
   def contact
   end
+
+  def wheel
+    @members = Member.all
+  end
 end

@@ -1,7 +1,3 @@
-<h1>About Us</h1>
-
-<p>Text..</p>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,7 +38,21 @@
 
 </head>
 <body>
-    <div id="chart"></div>
+
+  <div id="clockdiv">
+    <div>
+      <span class="hours"></span>
+      <span class="smalltext">hours</span>
+
+      <span class="minutes"></span>
+      <span class="smalltext">minutes</span>
+
+      <span class="seconds"></span>
+      <span class="smalltext">seconds</span>
+    </div>
+  </div>
+
+    <div id="chart">
     <div id="question"><h1></h1></div>
 
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
@@ -58,12 +68,15 @@
             color = d3.scale.category20();//category20c()
             //randomNumbers = getRandomNumbers();
 
+        //http://osric.com/bingo-card-generator/?title=HTML+and+CSS+BINGO!&words=padding%2Cfont-family%2Ccolor%2Cfont-weight%2Cfont-size%2Cbackground-color%2Cnesting%2Cbottom%2Csans-serif%2Cperiod%2Cpound+sign%2C%EF%B9%A4body%EF%B9%A5%2C%EF%B9%A4ul%EF%B9%A5%2C%EF%B9%A4h1%EF%B9%A5%2Cmargin%2C%3C++%3E%2C{+}%2C%EF%B9%A4p%EF%B9%A5%2C%EF%B9%A4!DOCTYPE+html%EF%B9%A5%2C%EF%B9%A4head%EF%B9%A5%2Ccolon%2C%EF%B9%A4style%EF%B9%A5%2C.html%2CHTML%2CCSS%2CJavaScript%2Cborder&freespace=true&freespaceValue=Web+Design+Master&freespaceRandom=false&width=5&height=5&number=35#results
+
         var data = [
-        <% @members.each do |member| %>
-        <li><%= " {'label':'#{member.name}',  'value':1,  'question':'What CSS property is used for specifying the area between the content and its border?'}," %></li>
-        <% end %>
-
-
+            <% @members.each do |member|
+            %>
+            <%= "{\"label\":\"#{member.name}\",\"value\":1,\"question\":\"#{member.name }\"},".html_safe
+            %>
+            <% end
+            %>
         ];
 
 
@@ -114,6 +127,8 @@
 
         function spin(d){
 
+            document.getElementById('clockdiv').innerHTML = "00 hours, 00 minutes, 00 seconds remaining"
+
             //all slices have been seen, all done
             if(oldpick.length == (data.length - 1)){
                 console.log("done");
@@ -146,8 +161,8 @@
                 .each("end", function(){
 
                     //mark question as seen
-                    d3.select(".slice:nth-child(" + (picked + 1) + ") path")
-                        .attr("fill", "#111");
+                    // d3.select(".slice:nth-child(" + (picked + 1) + ") path")
+                    //     .attr("fill", "#111");
 
                     //populate question
                     d3.select("#question h1")
@@ -176,7 +191,7 @@
             .attr("x", 0)
             .attr("y", 15)
             .attr("text-anchor", "middle")
-            .text("SPIN")
+            .text("🎲")
             .style({"font-weight":"bold", "font-size":"30px"});
 
 
@@ -204,6 +219,49 @@
 
             return array;
         }
+
+        // timeeeeeeeeeeeeeeeeeeeeeeeeerrrrrrrrrrrrrrrrrrrrrrrrrrrr
+        // timeeeeeeeeeeeeeeeeeeeeeeeeerrrrrrrrrrrrrrrrrrrrrrrrrrrr
+
+        function getTimeRemaining(endtime) {
+  var t = Date.parse(endtime) - Date.now();
+  var seconds = Math.floor((t / 1000) % 60);
+  var minutes = Math.floor((t / 1000 / 60) % 60);
+  var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+  return {
+    'total': t,
+    'hours': hours,
+    'minutes': minutes,
+    'seconds': seconds
+  };
+}
+
+function initializeClock(id, endtime) {
+  var clock = document.getElementById(id);
+  var hoursSpan = clock.querySelector('.hours');
+  var minutesSpan = clock.querySelector('.minutes');
+  var secondsSpan = clock.querySelector('.seconds');
+
+  function updateClock() {
+    var t = getTimeRemaining(endtime);
+
+    hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+    if (t.total <= 0) {
+      spin();
+      clearInterval(timeinterval);
+    }
+  }
+
+  updateClock();
+  var timeinterval = setInterval(updateClock, 1000);
+}
+
+var deadline = new Date('August 28, 2022 07:05:20');
+
+initializeClock('clockdiv', deadline);
 
     </script>
 </body>

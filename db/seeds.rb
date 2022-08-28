@@ -11,10 +11,10 @@ Member.destroy_all
 
 puts 'Creating members'\
 
-100.times do
+20.times do
   member = Member.create(
     name: Faker::Name.first_name,
-    points: rand(1..10)
+    points: 0
   )
   puts "Member with id: #{member.id} has been created"
 end
